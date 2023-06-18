@@ -1,8 +1,8 @@
 {
-  description = "Mac Nix Flake";
+  description = "MacOs Nix Darwin flake";
   inputs = {
     # called derivations that say how to build software.
-    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable"; # nixos-22.11
+    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable"; 
 
     # Manages configs links things into your home directory
     home-manager.url = "github:nix-community/home-manager/master";
@@ -13,10 +13,9 @@
     darwin.inputs.nixpkgs.follows = "nixpkgs";
   };
   outputs = inputs@{ nixpkgs, home-manager, darwin, ... }: {
-    darwinConfigurations.<HOSTNAME> =
+    darwinConfigurations.MACHINE_NAME = # replace MACHINE_NAME with your machine name
       darwin.lib.darwinSystem {
         system = "aarch64-darwin";
-        pkgs = import nixpkgs { system = "aarch64-darwin"; };
         modules = [
           ./modules/darwin
           home-manager.darwinModules.home-manager
@@ -26,16 +25,6 @@
               useUserPackages = true;
               users.mudrii.imports = [
                 ./modules/home-manager
-                ./modules/home-manager/dotfiles/bash.nix
-                ./modules/home-manager/dotfiles/zsh.nix
-                ./modules/home-manager/dotfiles/fish.nix
-                ./modules/home-manager/dotfiles/git.nix
-                ./modules/home-manager/dotfiles/nvim.nix
-                ./modules/home-manager/dotfiles/alacritty.nix
-                ./modules/home-manager/dotfiles/tmux.nix
-                ./modules/home-manager/dotfiles/kitty.nix
-                ./modules/home-manager/dotfiles/lf.nix
-                ./modules/home-manager/dotfiles/ssh.nix
               ];
             };
           }

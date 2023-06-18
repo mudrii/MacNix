@@ -3,6 +3,15 @@
 {
   services.nix-daemon.enable = true;
 
+  users = {
+    users = {
+      mudrii = {
+        shell = pkgs.fish;
+        home = "/Users/USER_NAME"; # Replace USER_NAME with your username 
+      };
+    };
+  };
+
   programs = {
     zsh.enable = true;
     fish.enable = true;

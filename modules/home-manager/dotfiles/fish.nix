@@ -110,40 +110,6 @@
         onEvent = "fish_preexec";
         body = "abbr !! sudo $argv[1]";
       };
-#      bind_status = {
-#        body = "commandline -i (echo '$status')";
-#      };
-#      bind_self = {
-#        body = "commandline -i (echo '%self')";
-#      };
-#      fish_user_key_bindings = {
-#        body = "
-#          bind '$?' bind_status
-#          bind '$$' bind_self
-#          bind ! bind_bang
-#          bind '$' bind_dollar
-#        ";
-#      };
-#      bind_bang = {
-#        body = "
-#          switch (commandline -t)
-#          case '!'
-#            commandline -t $history[1]; commandline -f repaint
-#          case '*'
-#            commandline -i !
-#          end
-#        ";
-#      };
-#      bind_dollar = {
-#        body = "
-#          switch (commandline -t)
-#          case '!'
-#            commandline -t $history[1]; commandline -f repaint
-#          case '*'
-#            commandline -i '$'
-#          end
-#        ";
-#      };
       bind_ctrl_r = {
         body = "
           switch (commandline -t)

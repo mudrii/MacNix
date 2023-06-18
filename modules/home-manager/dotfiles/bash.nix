@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, ... }:
 
 {
   programs = {
@@ -34,9 +34,6 @@
         vim = "nvim";
         nixsw = "darwin-rebuild switch --flake ~/src/system-config/.#";
         nixup = "pushd ~/src/system-config; nix flake update; nixsw; popd";
-        # ucl = "nix-collect-garbage -d && nix-store --gc && nix-store --repair --verify --check-contents && nix-store --optimise -vvv";
-        # scl = "sudo nix-collect-garbage -d && sudo nix-store --gc && sudo nix-store --repair --verify --check-contents && sudo nix-store --optimise -vvv";
-        # acl = "ucl && scl";
       };
     };
 

@@ -7,14 +7,21 @@
       terminal = "xterm-256color";
       historyLimit = 406000; # Up the history limit
       prefix = "C-a";
-      baseIndex = 0; # Index windows from 0
+      baseIndex = 1; # Index windows from 1
       mouse = true;
       shell = "${pkgs.fish}/bin/fish";
-#      plugins = with pkgs [
-#     ]
+      plugins = with pkgs; [
+        tmuxPlugins.better-mouse-mode
+        tmuxPlugins.resurrect
+        tmuxPlugins.yank
+        tmuxPlugins.nord
+        tmuxPlugins.resurrect
+        tmuxPlugins.open
+        tmuxPlugins.sidebar
+        tmuxPlugins.continuum
+        tmuxPlugins.vim-tmux-navigator
+      ];
       extraConfig = ''
-#        source ${pkgs.python39Packages.powerline}/share/tmux/powerline.conf
-       source ${pkgs.powerline}/share/tmux/powerline.conf
 
         # Lower delay
         set -s escape-time 1
@@ -34,7 +41,6 @@
         # monitor activity in windows
         setw -g monitor-activity on
 
-#        setw -g xterm-keys on
         set -sg repeat-time 600
         set -s focus-events on
 
@@ -55,16 +61,13 @@
 
         # Silence bell
         set-option -g visual-bell on
-
-#        set -g visual-bell on
-#        set -g bell-action any
-
-#        setw -g monitor-activity on
+        set -g bell-action any
+        setw -g monitor-activity on
         set -g visual-activity on
 
         # Change window-splitting commands
         unbind %
-        bind | split-window -h
+        bind = split-window -h
         bind - split-window -v
 
         bind C-f command-prompt -p find-session 'switch-client -t %%'
@@ -84,18 +87,8 @@
         bind K resize-pane -U 2
         bind L resize-pane -R 2
 
-#        bind -r h select-pane -L  # move left
-#        bind -r j select-pane -D  # move down
-#        bind -r k select-pane -U  # move up
-#        bind -r l select-pane -R  # move right
-
         bind > swap-pane -D       # swap current pane with the next one
         bind < swap-pane -U       # swap current pane with the previous one
-
-#        bind -r H resize-pane -L 2
-#        bind -r J resize-pane -D 2
-#        bind -r K resize-pane -U 2
-#        bind -r L resize-pane -R 2
       '';
     };
 }

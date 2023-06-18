@@ -1,6 +1,24 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 
 {
+  imports = [
+    ./dotfiles/bash.nix
+    ./dotfiles/zsh.nix
+    ./dotfiles/fish.nix
+    ./dotfiles/git.nix
+    ./dotfiles/nvim.nix
+    ./dotfiles/alacritty.nix
+    ./dotfiles/tmux.nix
+    ./dotfiles/kitty.nix
+    ./dotfiles/lf.nix
+    ./dotfiles/ssh.nix
+  ];
+
+  nixpkgs.config = {
+    allowUnfree = true;
+    allowBroken = true;
+  };
+
   home = {
     stateVersion = "22.11";
     sessionVariables = {
@@ -14,6 +32,7 @@
       # MANPAGER = "nvim -c 'set ft=man' -";
       TERM = "xterm-256color";
     };
+
     packages = with pkgs; [
       ripgrep
       fd
@@ -28,15 +47,23 @@
       nodejs
       pv
       ffmpeg
-      openai
-      openai-whisper
+#      powerline
       (
-        python39.withPackages (
+        python310.withPackages (
           ps: with ps; [
             poetry-core
             pip
+            openai
+            langchain
+            pandas
+            openai-whisper
+            tiktoken
+            ipython
+            jupyter
             boto3
-            torch-bin
+#            powerline
+#            torch-bin
+            torch
             pygments
             xstatic-pygments
           ]

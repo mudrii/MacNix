@@ -1,18 +1,13 @@
-{ config, pkgs, ... }:
+{ config, ... }:
 
 {
   programs.git = {
     enable = true;
     lfs.enable = true;
-    userName = "mudrii";
-    userEmail = "mudreac@gmail.com";
+    userName = "USER_NAME"; # rename to your users name
+    userEmail = "NAME@EMAIL.DOM"; # rename to your email
     ignores = [ "*~" "*.swp" ".DS_Store" ];
-/*
-    signing = {
-      key = "C37CEF50333B225E2FCA7D2003B8C6E70C3ED787";
-      signByDefault = true;
-    };
-*/
+
     aliases = {
       unstage = "reset HEAD --";
       pr = "pull --rebase";
@@ -46,11 +41,6 @@
         # autocrlf = "input";
         editor = "nvim";
       };
-
-      # credential."https://github.com" = {
-      #   #helper = "!${pkgs.gh}/bin/gh auth git-credential";
-      #   helper = "!/run/current-system/sw/bin/gh auth git-credential";
-      #   };
 
       merge = {
         conflictstyle = "diff3";
